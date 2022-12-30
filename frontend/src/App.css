@@ -1,0 +1,116 @@
+:root {
+  --bg-body: rgb(222, 225, 231);
+  --bg-pane: rgb(248, 248, 248);
+  --bg-pane-view: transparent;
+  --bg-scroll:  rgb(125, 174, 218);
+  --color-pane: rgb(138, 138, 138);
+  /* Nav */
+  --color-nav: rgb(63, 86, 106);
+  --bg-nav: transparent;
+  /* pane buttons */
+  --bg-pane-hover:   var(--bg-scroll);
+  --hover-color: rgb(255, 255, 255);
+  /* btn submit */
+  --bg-submit: #086e88;
+  --color-submit: #ffffff;
+  /* btn cancel */
+  --bg-cancel: rgb(170, 170, 170);
+  --color-cancel: rgb(255, 255, 255);
+  /* btn save */
+  --btn-save-bg: #3feb72;
+  --btn-save-color: #ffffff;
+
+  --active-color: white;
+  --red-delete: red;
+  --delete-color: white;
+  --height-nav: 4rem;
+  --width-opts: 280px;
+  --btn-update: #049464;
+  --update-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-body);
+}
+
+.App {
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+}
+
+.error {
+  margin-top: 5px;
+  color: red;
+  padding: 0 5px;
+  width: 100%;
+}
+
+select {
+  height: 2.5rem;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+input, .locked{
+  width: 100%;
+  height: 2.5rem;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+input:not([type="submit"]) {
+  padding: 0 10px;
+  border: 1px solid rgb(186, 186, 186);
+  box-sizing: border-box;
+
+}
+
+.submit {
+  background: var(--bg-pane);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: var(--bg-cancel);
+  color: var(--color-cancel);
+  cursor: pointer;
+  border: 1px solid rgb(206, 206, 206);
+  box-sizing: border-box;
+}
+
+.locked, .login, .submit {
+  background:var(--bg-submit);
+  color: var(--color-submit);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-edit {
+  color:var(--bg-submit);
+  background: var(--color-submit);
+}
+
+.btn-save {
+  background:var(--btn-save-bg);
+  color: var(--btn-save-color);
+}
+
+.td-red {
+  background: #ffb8a846;
+  color: rgb(86, 3, 3);
+}

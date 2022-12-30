@@ -1,0 +1,292 @@
+.dashboard {
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: var(--width-opts) calc(100% - var(--width-opts));
+}
+
+/* Dashboard options */
+.dashboard-options {
+  width: 100%;
+  min-width: 250px;
+  max-width: 350px;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-pane);
+  color:var(--color-pane);
+  padding: .8rem;
+  position: relative;
+}
+
+.btn-close,
+.hamburguer {
+  color: var(--color-nav);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.btn-close {
+  color: var(--color-pane);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.btn-unique {
+  width: 100%;
+  color: var(--color-pane);
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.btn-separator, svg, path {
+  pointer-events: none;
+}
+
+.selected-option {
+  background: var(--bg-pane-hover);
+}
+
+.btn-block {
+  list-style: none;
+}
+
+.btn-main, .btn-option{
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.btn-main{
+  justify-content: space-between;
+}
+
+.btn-separator {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px
+}
+
+.btn-option span{
+  margin-left: 45px;
+}
+
+.btn-main span, .btn-option span {
+  pointer-events: none;
+}
+
+.btn-main:hover, .btn-option:hover{
+  background: var(--bg-pane-hover);
+  color: var(--hover-color)
+}
+
+.open-close {
+  height: 1rem;
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 15px;
+}
+
+.arrow-down {
+  top: 0;
+  width: 10px;
+  height: 2px;
+  background: var(--color-pane);
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.arrow-down::after {
+  content: "";
+  width: 10px;
+  height: 2px;
+  transform: rotate(90deg);
+  top: -4px;
+  left: 4px;
+  background: var(--color-pane);
+  position: absolute;
+}
+
+.arrow-left {
+  width: 10px;
+  height: 2px;
+  background: var(--color-pane);
+  position: relative;
+  transform: rotate(-45deg);
+  bottom: -3px;
+  left:3px;
+}
+
+.arrow-left::after {
+  content: "";
+  width: 10px;
+  height: 2px;
+  transform: rotate(90deg);
+  top: -4px;
+  left: 4px;
+  background:var(--color-pane);
+  position: absolute;
+}
+
+/* Dashboard pane */
+.dashboard-pane {
+  width: 100%;
+  background: var(--bg-pane-view);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.pane-nav {
+  display: flex;
+  min-height: var(--height-nav);
+  width: 100%;
+  background: var(--bg-nav);
+  align-items: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  justify-content: end;
+  align-items: center;
+  border-bottom: 1px ;
+  color: var(--color-nav);
+}
+
+.section-user {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+}
+
+.username {
+  width: 100%;
+  margin-left: 10px;
+  font-size: .7rem;
+}
+
+.user-photo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+/* Generals */ 
+.container-view {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Scroll bar */
+::-webkit-scrollbar{
+  width: 10px;
+  background-color: var(--bg-pane);
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: var(--bg-scroll); 
+  border-radius: 5px;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+/* Modal window */
+.modal {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: rgba(1, 1, 1, 0.478);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 800px){
+  .dashboard {
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+  }
+  .dashboard-pane {
+    width: 100%;
+  }
+
+  .dashboard-options {
+    position:fixed;
+    left:0;
+    padding-top: 3rem;
+    z-index: 1000;
+  }
+
+  .pane-nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-close, .hamburguer {
+    display: flex;
+  }
+
+  .pane-hidden {
+    position:fixed;
+    left: -350px;
+  }
+
+  .pane-centered {
+    position:fixed;
+    left: 0;
+  }
+
+  .pane-centered, 
+  .pane-hidden {
+    transition: .2s ease-in-out;
+  }
+
+  .form-create {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 250px;
+    background: white;
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+    gap: 1rem
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .container-view {
+    width: 100%;
+    padding: 5px;
+  }
+}

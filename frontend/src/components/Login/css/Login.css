@@ -1,0 +1,57 @@
+:root {
+  --bg-container: rgb(216, 216, 216);
+  --shadow: 0px 0px 5px 2px rgb(189, 187, 187);
+}
+
+.container-login {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-container);
+  justify-content: center;
+  align-items: center;
+}
+
+.card-login {
+  width: 90%;
+  min-width: 270px;
+  max-width: 400px;
+  background: white;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  box-sizing: border-box;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.card-title {
+  margin: 2rem 0;
+}
+
+.block-input{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.block-input label {
+  font-size: .9rem;
+  width: 100%;
+  padding: 0 5px;
+  margin-bottom: 5px;
+}
+
+.copywrite {
+  color: var(--bg-pane);
+  margin-top: 2rem;
+}

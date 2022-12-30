@@ -1,0 +1,131 @@
+:root {
+  --border-gray: rgb(194, 194, 194);
+  --gray-color: rgb(113, 113, 113);
+}
+
+.form-container{
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  background: white;
+  max-width: 600px;
+  box-shadow: 1px 1px 5px 1px rgb(197, 197, 197);
+}
+
+.form, .multi-input{
+  border: none;
+  background: var(--bg-pane)/* var(--bg-pane-view) */;
+  padding: 1rem;
+  gap: 1rem;
+  width: 100%;
+}
+
+.multi-input {
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit,minmax(220px, 1fr));
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  max-width: 500px;
+  z-index: 2;
+}
+
+.form-title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.form select {
+  width:100%;
+  background: transparent;
+}
+
+.transparent {
+  background: transparent;
+}
+
+.custom-input, .textarea {
+  padding: .5rem 1rem;
+  width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid var(--border-gray);
+  background: transparent;
+  color: var(--gray-color)
+}
+
+textarea {
+  resize: none;
+  max-height: 2.5rem
+}
+
+.custom-select {
+  width: 100%;
+  padding: .5rem .5rem;
+  outline: none;
+  border-radius: 5px;
+  background: transparent;
+  border: 1px solid var(--border-gray);
+  color: var(--gray-color)
+}
+
+.container-input {
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+}
+
+.container-btn {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap:10px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 100%;
+}
+
+.container-btn button {
+  padding: .5rem 1rem;
+  width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: none;
+  background: var(--bg-pane);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.container-input label {
+  margin-left: 5px;
+  font-size: .8rem;
+  font-weight: bold;
+  color: rgb(113, 113, 113);
+}
+
+.section-btns {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 1rem;
+  position: absolute;
+  top: -2.25rem;
+}
+
+.container-submit {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
