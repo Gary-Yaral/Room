@@ -2,7 +2,7 @@ import { SchoolInfo } from "./components/SchoolInfo";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { postData } from "../../../../utils/requestData";
-import { urlSchools } from "../../constants/routes";
+import { schoolRoutes } from "../../constants/routes";
 import { defaultValues } from "./constants";
 
 export const School = () => {
@@ -15,7 +15,7 @@ export const School = () => {
 
   useEffect(() => {
     const data = { teacher_dni: teacher.dni }
-    postData(urlSchools, data, setSchool, true);
+    postData(schoolRoutes.GET_ALL, data, setSchool, true);
   }, [teacher]);
 
   return (

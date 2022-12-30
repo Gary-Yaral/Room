@@ -8,12 +8,11 @@ import { InputSpecialty } from "../commons/InputSpecialty";
 import { messageSave } from "../../utils/messageAlert";
 import { defaultValues } from "./constants";
 import {
-  urlSchools,
-  urlPeriodAll,
+  schoolRoutes,
+  periodRoutes,
   urlLevels,
   urlParallels,
-  urlCourseAll,
-  urlCourse,
+  courseRoutes,
 } from "../../constants/routes";
 
 export function Course() {
@@ -44,7 +43,7 @@ export function Course() {
 
     let obj = { ...data, speciality };
     messageSave({
-      url: urlCourse,
+      url: courseRoutes.COURSE,
       objectData: obj,
       name: "Periodo",
       letterA: false,
@@ -54,9 +53,10 @@ export function Course() {
   };
 
   useEffect(() => {
-    postData(urlSchools, { teacher_dni: teacher.dni }, setSchool);
-    postData(urlPeriodAll, { teacher_dni: teacher.dni }, setPeriods);
-    postData(urlCourseAll, { teacher_dni: teacher.dni }, setCourses);
+    const data = { teacher_dni: teacher.dni }
+    postData(schoolRoutes.GET_ALL, data, setSchool);
+    postData(periodRoutes.PERIOD_ALL, data, setPeriods);
+    postData(courseRoutes.GET_ALL, data, setCourses);
     getData(urlLevels, setLevels);
     getData(urlParallels, setParallels);
   }, [teacher, clicked]);

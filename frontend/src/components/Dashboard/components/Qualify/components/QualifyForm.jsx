@@ -13,7 +13,7 @@ import {
   urlQuimestres,
   urlSubjects,
   urlTypeAll,
-  urlCourseAll,
+  courseRoutes,
   urlInputStudentFound,
 } from "../../../constants/routes";
 import axios from "axios";
@@ -26,13 +26,13 @@ const defaultValues = {
   subject: "",
 };
 
-export const FormSearch = ({
+export const QualifyForm = ({
   setClicked,
   setInputsFound,
   setTheads,
   setData,
   setForm,
-  setInputData
+  setInputData,
 }) => {
   const [courses, setCourses] = useState([]);
   const [quimestres, setQuimestres] = useState([]);
@@ -57,17 +57,16 @@ export const FormSearch = ({
   });
 
   useEffect(() => {
-    if (teacher) {
-      postData(urlCourseAll, { teacher_dni: teacher.dni }, setCourses);
-      getData(urlQuimestres, setQuimestres);
-      getData(urlPartials, setPartials);
-      getData(urlSubjects, setSubjects);
-      getData(urlTypeAll, setInputs);
-    }
+    const data = { teacher_dni: teacher.dni };
+    postData(courseRoutes.GET_ALL, data, setCourses);
+    getData(urlQuimestres, setQuimestres);
+    getData(urlPartials, setPartials);
+    getData(urlSubjects, setSubjects);
+    getData(urlTypeAll, setInputs);
   }, [teacher, students]);
 
   const onSubmit = async (formData) => {
-    setForm(formData)
+    setForm(formData);
     const { data } = await axios.post(urlInputStudentFound, formData);
     if (data.inputs) {
       let table = parseInputs(data.inputs, data.students);

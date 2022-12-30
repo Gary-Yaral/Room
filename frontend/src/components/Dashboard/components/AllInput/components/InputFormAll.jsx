@@ -3,25 +3,17 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { getData, postData } from "../../../../../utils/requestData";
 import { CustomSelect } from "../../commons/CustomSelect";
+import { defaultValues } from "../constants";
 import {
   urlPartials,
   urlQuimestres,
-  urlSchools,
   urlSubjects,
   urlTypeAll,
-  urlCourseAll,
-  urlInputsFound,
+  courseRoutes,
+  inputRoutes,
 } from "../../../constants/routes";
 
-const defaultValues = {
-  course_id: "",
-  quimestre: "",
-  partial: "",
-  type: "",
-  subject: "",
-};
-
-const InputForm = ({ setClicked, setResults }) => {
+export const InputFormAll = ({ setClicked, setResults }) => {
   const [courses, setCourses] = useState([]);
   const [quimestres, setQuimestres] = useState([]);
   const [partials, setPartials] = useState([]);
@@ -42,7 +34,7 @@ const InputForm = ({ setClicked, setResults }) => {
   useEffect(() => {
     const { dni } = teacher;
     const data = { teacher_dni: dni };
-    postData(urlCourseAll, data, setCourses);
+    postData(courseRoutes.GET_ALL, data, setCourses);
     getData(urlQuimestres, setQuimestres);
     getData(urlPartials, setPartials);
     getData(urlSubjects, setSubjects);
@@ -51,7 +43,7 @@ const InputForm = ({ setClicked, setResults }) => {
 
   const onSubmit = (data) => {
     setClicked(true);
-    postData(urlInputsFound, data, setResults);
+    postData(inputRoutes.INPUT_FOUND_MANY, data, setResults);
   };
 
   return (
@@ -114,5 +106,3 @@ const InputForm = ({ setClicked, setResults }) => {
     </div>
   );
 };
-
-export { InputForm };

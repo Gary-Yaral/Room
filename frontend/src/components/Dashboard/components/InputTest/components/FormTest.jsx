@@ -5,24 +5,17 @@ import { InputDate } from "../../commons/InputDate";
 import { AreaDescription } from "../../commons/AreaDescription";
 import { CustomSelect } from "../../commons/CustomSelect";
 import { useForm } from "react-hook-form";
-import { messageSave } from "../../../utils/messageAlert";
-import { defaultValues } from "../constants";
-import axios from "axios";
 import {
   urlPartials,
   urlQuimestres,
   urlSubjects,
-  urlTypeAll,
-  courseRoutes,
-  inputRoutes,
-  urlStudentsList,
+  courseRoutes
 } from "../../../constants/routes";
 
-const InputForm = ({ clicked, setClicked }) => {
+export const FormTest = () => {
   const [courses, setCourses] = useState([]);
   const [quimestres, setQuimestres] = useState([]);
   const [partials, setPartials] = useState([]);
-  const [inputs, setInputs] = useState([]);
   const [subjects, setSubjects] = useState([]);
 
   const {
@@ -36,9 +29,7 @@ const InputForm = ({ clicked, setClicked }) => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
-    defaultValues,
-  });
+  } = useForm();
 
   useEffect(() => {
     const { dni } = teacher;
@@ -47,31 +38,12 @@ const InputForm = ({ clicked, setClicked }) => {
     getData(urlQuimestres, setQuimestres);
     getData(urlPartials, setPartials);
     getData(urlSubjects, setSubjects);
-    getData(urlTypeAll, setInputs);
   }, [teacher]);
 
   const onSubmit = async (data) => {
-    let description = data.description;
-    if (description.length > 0) {
-      description = description
-        .split(" ")
-        .filter((text) => text !== "")
-        .join(" ");
-    }
-
-    const {
-      data: { results },
-    } = await axios.post(urlStudentsList, { course_id: data.course_id });
-    let obj = { ...data, students: results, description };
-    messageSave({
-      url: inputRoutes.INPUT,
-      objectData: obj,
-      name: "Insumo",
-      letterA: false,
-      reset: () => reset(defaultValues),
-      refresh: () => (clicked ? setClicked(false) : setClicked(true)),
-    });
+   
   };
+  
   return (
     <form className="multi-input" onSubmit={handleSubmit(onSubmit)}>
       <CustomSelect
@@ -95,16 +67,6 @@ const InputForm = ({ clicked, setClicked }) => {
         isProp={true}
       />
       <CustomSelect
-        title={"Tipo"}
-        prop={"name"}
-        name={"type"}
-        options={inputs}
-        register={register}
-        errors={errors}
-        letterA={false}
-        isProp={true}
-      />
-      <CustomSelect
         title={"Quimestre"}
         prop={"name"}
         name={"quimestre"}
@@ -114,28 +76,6 @@ const InputForm = ({ clicked, setClicked }) => {
         letterA={false}
         isProp={true}
       />
-      <CustomSelect
-        title={"Parcial"}
-        prop={"name"}
-        name={"partial"}
-        options={partials}
-        register={register}
-        errors={errors}
-        letterA={false}
-        isProp={true}
-      />
-      <InputDate
-        title="Fecha de envío"
-        name="date"
-        register={register}
-        errors={errors}
-      />
-      <AreaDescription
-        title="Descripción"
-        name="description"
-        register={register}
-        errors={errors}
-      />
       <div className="container-submit">
         <input type="submit" className="locked" value="Crear" />
       </div>
@@ -143,4 +83,3 @@ const InputForm = ({ clicked, setClicked }) => {
   );
 };
 
-export { InputForm };

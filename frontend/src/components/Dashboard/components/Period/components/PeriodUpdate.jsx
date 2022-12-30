@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { messageUpdate } from "../../../utils/messageAlert";
-import { urlPeriod } from "../../../constants/routes";
+import { periodRoutes } from "../../../constants/routes";
 import { CustomSelect } from "../../commons/CustomSelect";
 import { periods } from "../constants/years";
 import { defaultValues } from "../constants";
@@ -34,7 +34,7 @@ export const PeriodUpdate = ({
     };
 
     messageUpdate({
-      url: urlPeriod,
+      url: periodRoutes.PERIOD,
       objectData: obj,
       name: "Periodo",
       letterA: false,

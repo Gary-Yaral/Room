@@ -1,11 +1,8 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { postData } from "../../../../../utils/requestData";
-import { urlSchools } from "../../../constants/routes";
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
-export const SchoolInfo = ({ school, locked, refresh, setRefresh, setLocked }) => {
+export const SchoolInfo = ({ school, locked, setLocked }) => {
   const {
     info: { teacher },
   } = useSelector(({ logged }) => logged);

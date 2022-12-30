@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { postData } from "../../../../utils/requestData";
-import { urlCourseAll, urlStudents } from "../../constants/routes";
+import { courseRoutes, urlStudents } from "../../constants/routes";
 import { NewStudent } from "./components/NewStudent";
 import { StudentTable } from "./components/StudentTable";
 
@@ -33,7 +33,7 @@ const Student = () => {
 
   useEffect(() => {
     const data = { teacher_dni: teacher.dni }
-    postData(urlCourseAll, data, setCourses);
+    postData(courseRoutes.GET_ALL, data, setCourses);
   }, [teacher, clicked]);
 
   const handleSearch = (e) => {

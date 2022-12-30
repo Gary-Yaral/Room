@@ -4,8 +4,8 @@ import { useState } from "react";
 import { capitalize } from "../../utils/capitalize";
 import { generateArrayTD, parseInputs } from "../../utils/inputParser";
 import { urlInputStudentFound } from "../../constants/routes";
-import { FormSearch } from "./components/FormSearch";
-import { TableSearch } from "./components/TableSearch";
+import { QualifyForm } from "./components/QualifyForm";
+import { QualifyTable } from "./components/QualifyTable";
 
 const initialValues = {
   course_id: "",
@@ -43,7 +43,7 @@ export const Qualify = () => {
   return (
     <div className="container-view">
       <div className="form-title">Calificar</div>
-      <FormSearch
+      <QualifyForm
         clicked={clicked}
         setClicked={setClicked}
         setInputsFound={setInputsFound}
@@ -64,7 +64,7 @@ export const Qualify = () => {
               }).join(" ")
             }
           </div>
-          <TableSearch
+          <QualifyTable
             changed={changed}
             setChanged={setChanged}
             inputsFound={inputsFound}

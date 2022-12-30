@@ -9,7 +9,7 @@ import {
   urlPartials,
   urlQuimestres,
   urlSubjects,
-  urlCourseAll,
+  courseRoutes,
   urlMedias
 } from "../../../constants/routes";
 
@@ -28,7 +28,7 @@ const AverageForm = ({ handleLoad, dni }) => {
 
   useEffect(() => {
       let requestData =  { teacher_dni: dni }
-      postData(urlCourseAll, requestData, setCourses);
+      postData(courseRoutes.GET_ALL, requestData, setCourses);
       getData(urlQuimestres, setQuimestres);
       getData(urlPartials, setPartials);
       getData(urlSubjects, setSubjects);

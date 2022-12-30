@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { InputForm } from "./components/InputForm"
-import { InputTable } from "./components/InputTable"
+import { InputFormAll } from "./components/InputFormAll"
+import { InputTableAll } from "./components/InputTableAll"
 
 const AllInput = () => {
   const [results, setResults] =useState([])
@@ -13,9 +13,9 @@ const AllInput = () => {
   return (
     <div className='container-view'>
       <div className="form-title">Ver insumos</div>
-      <InputForm setResults={setResults} clicked={clicked} setClicked={setClicked} />
+      <InputFormAll setResults={setResults} clicked={clicked} setClicked={setClicked} />
       {
-        (clicked && results.length > 0) && <InputTable results={results}/>
+        (clicked && results.length > 0) && <InputTableAll results={results}/>
       }
       {
         (clicked && results.length === 0) && <div>No existe coincidencia con su busqueda</div>

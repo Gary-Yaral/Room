@@ -14,5 +14,6 @@ export const privateRoutes = {
   QUALIFY: "qualify",
   ALL_INPUTS: "all-inputs",
   AVERAGE: "averages",
-  SETTINGS: "settings"
+  SETTINGS: "settings",
+  INPUT_TEST: "tests"
 }

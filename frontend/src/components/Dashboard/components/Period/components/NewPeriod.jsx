@@ -1,5 +1,5 @@
 import { messageSave } from "../../../utils/messageAlert";
-import { urlPeriod } from "../../../constants/routes";
+import { periodRoutes } from "../../../constants/routes";
 import { periods } from "../constants/years";
 import { CustomSelect } from "../../commons/CustomSelect";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,7 @@ export const NewPeriod = ({ school, clicked, setClicked }) => {
     let obj = { year:data.period, school_id: school.id };
 
     messageSave({
-      url: urlPeriod,
+      url: periodRoutes.PERIOD,
       objectData: obj,
       name: "Periodo",
       letterA: false,

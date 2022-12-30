@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { messageDelete } from "../../../utils/messageAlert";
-import { urlCourse } from "../../../constants/routes";
+import { courseRoutes } from "../../../constants/routes";
 import { CourseUpdate } from "./CourseUpdate";
 import { defaultValues } from "../constants"
 
@@ -25,7 +25,7 @@ export const CoursesTable = ({ schoolData, clicked, setClicked }) => {
 
     if (type == "delete") {
       messageDelete({
-        url: urlCourse,
+        url: courseRoutes.COURSE,
         objectData: { id: tr.id },
         name: "Curso",
         refresh: () => (clicked ? setClicked(false) : setClicked(true)),

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { messageUpdate } from "../../../utils/messageAlert";
-import { urlCourse } from "../../../constants/routes";
+import { courseRoutes } from "../../../constants/routes";
 import { CustomSelect } from "../../commons/CustomSelect";
 import { InputSpecialty } from "../../commons/InputSpecialty";
 import { defaultValues } from "../constants";
@@ -39,7 +39,7 @@ export const CourseUpdate = ({
     let obj = { ...data, speciality };
 
     messageUpdate({
-      url: urlCourse,
+      url: courseRoutes.COURSE,
       objectData: obj,
       name: "Curso",
       letterA: false,

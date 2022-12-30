@@ -9,7 +9,7 @@ import {
   regEx,
 } from "./utils/validateLogin";
 import { initialLogin, initialState } from "./utils/defaultValues";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { save } from "../../store/features/teacher/slice";
 
 import { urlLogin } from "../Dashboard/constants/routes";

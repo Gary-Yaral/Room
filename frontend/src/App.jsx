@@ -14,10 +14,10 @@ import { Qualify } from "./components/Dashboard/components/Qualify";
 import { Protected } from "./components/Protected";
 import { privateRoutes, publicRoutes } from "./components/constants/router";
 import { Public } from "./components/Public";
+import { InputTest } from "./components/Dashboard/components/InputTest"
 import "./App.css";
 
 function App() {
-  console.log("hola");
   return (
     <BrowserRouter>
       <div className="App">
@@ -38,6 +38,7 @@ function App() {
               <Route path={privateRoutes.ALL_INPUTS} element={<AllInput />} />
               <Route path={privateRoutes.SETTINGS} element={<Settings />} />
               <Route path={privateRoutes.AVERAGE} element={<Average />} />
+              <Route path={privateRoutes.INPUT_TEST} element={<InputTest />} />
             </Route>
           </Route>
           <Route path="*" element={<>PAGE NOT FOUND</>} />

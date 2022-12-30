@@ -6,6 +6,7 @@ import {
   AiOutlineUsergroupAdd,
   AiFillFileText,
   AiFillSetting,
+  AiFillContainer
 } from "react-icons/ai";
 import { privateRoutes, publicRoutes } from "../../constants/router";
 
@@ -29,6 +30,15 @@ const buttons = [
       { text: "Calificar", url: privateRoutes.QUALIFY },
       { text: "Ver todos", url: privateRoutes.ALL_INPUTS },
       { text: "Promedios", url: privateRoutes.AVERAGE },
+    ],
+  ],
+  [
+    "Examen",
+    <AiFillContainer />,
+    [
+      { text: "Nuevo", url: privateRoutes.INPUT_TEST },
+      { text: "Calificar", url: privateRoutes.QUALIFY },
+      { text: "Ver todos", url: privateRoutes.ALL_INPUTS }
     ],
   ],
   ["Configuración", <AiFillSetting />, privateRoutes.SETTINGS],

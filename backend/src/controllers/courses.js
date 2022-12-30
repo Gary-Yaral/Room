@@ -112,14 +112,5 @@ const getAll = (req, res) => {
   });
 };
 
-const getOne = (req, res) => {
-  let { id } = req.body;
-  let query = `SELECT * FROM school WHERE id= "${id}"`;
 
-  return connection.query(query, (error, results) => {
-    if (error) throw error;
-    return res.status(200).json({ results });
-  });
-};
-
-module.exports = { save, update, deleteRow, getAll, getOne };
+module.exports = { save, update, deleteRow, getAll };

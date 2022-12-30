@@ -6,7 +6,7 @@ import { BiSave } from "react-icons/bi";
 import { capitalize } from "../../../utils/capitalize";
 import { urlInputStudents } from "../../../constants/routes";
 
-export const TableSearch = ({ inputsFound, theads, changed, setChanged }) => {
+export const QualifyTable = ({ inputsFound, theads, changed, setChanged }) => {
   const [disabled, setDisabled] = useState([]);
   const [values, setValues] = useState([]);
 

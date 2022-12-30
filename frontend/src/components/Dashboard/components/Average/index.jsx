@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { urlStudents, urlTypeAll } from "../../constants/routes";
-import { organizeAverage } from "../../utils/organizeAverage";
+import { generateAverage } from "../../utils/generateAverage";
 import { AverageForm } from "./components/AverageForm";
 import { AverageTable } from "./components/AverageTable";
 import { defaultTitle } from "./constants";
@@ -27,7 +27,7 @@ export const Average = () => {
 
   useEffect(() => {
     if (inputs.length > 0 && types.length > 0 && students.length > 0) {
-      setAverages(organizeAverage(inputs, students));
+      setAverages(generateAverage(inputs, students, types));
     }
   }, [inputs, types, students]);
 
