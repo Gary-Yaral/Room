@@ -22,6 +22,16 @@ export const inputRoutes = {
   INPUT_ONE: `${API}/inputs/one`
 }
 
+export const studentRoutes = {
+  STUDENT: `${API}/students`,
+  GET_ALL: `${API}/students/all`,
+  GET_LIST: `${API}/students/list`
+}
+
+export const loginRoute = {
+  LOGIN: `${API}/students/list`
+}
+
 
 let urlParallels = "http://localhost:6500/api/v1.0/parallels/all";
 let urlLevels = "http://localhost:6500/api/v1.0/levels/all";
@@ -42,12 +52,8 @@ let urlMedias = "http://localhost:6500/api/v1.0/medias";
 let urlInputStudentFound = "http://localhost:6500/api/v1.0/input_student/found";
 let urlInputStudentsAll = "http://localhost:6500/api/v1.0/input_student/all";
 let urlInputStudents = "http://localhost:6500/api/v1.0/input_student";
-/* Students */
-let urlStudents = "http://localhost:6500/api/v1.0/students/all";
-let urlStudentsList = "http://localhost:6500/api/v1.0/students/list";
 
 export {
-  urlLogin,
   urlLevels,
   urlParallels,
 
@@ -59,7 +65,5 @@ export {
   urlInputStudentFound,
   urlInputStudentsAll,
   urlInputStudents,
-  urlStudents,
-  urlStudentsList,
   urlMedias
 }

@@ -1,34 +1,38 @@
 const { connection } = require("../sql/connection");
+const { studentQueries } = require("../utils/functions/sqlQuerys");
 
 const save = (req, res) => {
-  let { level, parallel, period, speciality } = req.body;
- 
-  let query = `
-  SELECT * FROM course
-    WHERE 
-      level = "${level}" AND
-      period = "${period}" AND
-      parallel = "${parallel}"`;
+  let { dni, course_id, name, lastname } = req.body;
+
+  let query = studentQueries.SAVE(
+    dni,
+    course_id,
+    name,
+    lastname,
+  );
 
   connection.query(query, (error, results) => {
     if (error) throw error;
-    if (results.length > 0) {
-      return res.json({ status: false, error: `Este curso ya existe` });
+    if (results.affectedRows > 0) {
+      query = studentQueries.INSERT_INPUTS(dni, course_id);
+      return connection.query(query, (error, results) => {
+        if (error) throw error;
+        return res.status(200).json({ status: true, results });
+      });
     }
 
-    let values = `"${level}","${parallel}", "${speciality}", "${period}"`;
-    query = `INSERT INTO course(level, parallel, speciality, period) VALUES(${values})`;
-
-    connection.query(query, (error, results) => {
-      if (error) throw error;
-      return res.status(200).json({ status: true, results });
-    });
+    return res
+      .status(200)
+      .json({
+        status: false,
+        error: `Ya existe un estudiantes registrado con la cédula ${dni}`,
+      });
   });
 };
 
 const update = (req, res) => {
   let { id, level, parallel, period, speciality } = req.body;
- 
+
   let query = `
   SELECT * FROM course
     WHERE 
@@ -60,7 +64,7 @@ const update = (req, res) => {
 
 const deleteRow = (req, res) => {
   let { id } = req.body;
-  let query = `DELETE FROM course WHERE id="${id}"`;
+  let query = `DELETE FROM student WHERE id="${id}"`;
 
   return connection.query(query, (error, results) => {
     if (error) {
@@ -83,7 +87,8 @@ const deleteRow = (req, res) => {
 const getAll = (req, res) => {
   let { course_id } = req.body;
 
-  let query = `SELECT 
+  let query = `SELECT
+    student.id, 
     student.dni,
     student.name,
     student.lastname,

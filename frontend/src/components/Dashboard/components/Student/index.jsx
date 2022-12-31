@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { postData } from "../../../../utils/requestData";
-import { courseRoutes, urlStudents } from "../../constants/routes";
+import { courseRoutes, studentRoutes } from "../../constants/routes";
 import { NewStudent } from "./components/NewStudent";
 import { StudentTable } from "./components/StudentTable";
+import { defaultValues } from "./constants";
 
 const Student = () => {
   const [courses, setCourses] = useState([]);
   const [course, setCourse] = useState("");
   const [searched, setSearched] = useState(false);
   const [found, setFound] = useState([]);
-  const [students, setStudent] = useState([]);
   const [clicked, setClicked] = useState(false);
   const {
     info: { teacher },
@@ -22,27 +22,23 @@ const Student = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
-    defaultValues: {
-      dni: "",
-      course_id: "",
-      name: "",
-      lastname: "",
-    },
-  });
+  } = useForm({defaultValues});
 
   useEffect(() => {
     const data = { teacher_dni: teacher.dni }
     postData(courseRoutes.GET_ALL, data, setCourses);
   }, [teacher, clicked]);
 
+  const refreshTable = (value) => {
+    postData(studentRoutes.GET_ALL, { course_id: value }, setFound);
+  }
+
   const handleSearch = (e) => {
     let value = e.target.value;
     setCourse(e.target.value);
-
     if (value !== "") {
       setSearched(true);
-      postData(urlStudents, { course_id: value }, setFound);
+      refreshTable(value)
     } else {
       setSearched(false);
     }
@@ -76,6 +72,7 @@ const Student = () => {
           clicked={clicked}
           setClicked={setClicked}
           students={found}
+          refreshTable={ () => refreshTable(course) }
         />
       )}
       {found.length === 0 && searched && <div>Sin resultados</div>}

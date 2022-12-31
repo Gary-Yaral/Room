@@ -1,25 +1,27 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { studentRoutes } from "../../../constants/routes";
+import { messageSave } from "../../../utils/messageAlert";
 import { CustomInput } from "../../commons/CustomInput";
 import { CustomSelect } from "../../commons/CustomSelect";
+import { defaultValues } from "../constants";
 
-export const NewStudent = ({ courses }) => {
+export const NewStudent = ({ courses, clicked, setClicked }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
-    defaultValues: {
-      dni: "",
-      course_id: "",
-      name: "",
-      lastname: "",
-    },
-  });
+  } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
-    console.log(data);
+    messageSave({
+      name: "Estudiante", 
+      url: studentRoutes.STUDENT, 
+      objectData: data, 
+      reset: () => reset(defaultValues),
+      refresh: () => (clicked ? setClicked(false) : setClicked(true)),
+    })
   };
 
   return (

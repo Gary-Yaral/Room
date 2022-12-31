@@ -1,28 +1,43 @@
 import { useState } from "react";
-import { messageDelete } from "../../../utils/messageAlert"
+import { messageDelete } from "../../../utils/messageAlert";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { studentRoutes } from "../../../constants/routes";
 
-export const StudentTable = ({ clicked, setClicked, students }) => {
+export const StudentTable = ({
+  clicked,
+  setClicked,
+  students,
+  refreshTable,
+}) => {
   const [modal, setModal] = useState(false);
-  const [selected, setSelected] = useState({id: "", period: ""})
+  const [selected, setSelected] = useState({ id: "", period: "" });
   const handleClick = (e, type) => {
     let td = e.target.parentNode;
     let tr = td.parentNode;
     if (type == "update") {
-      let year = tr.getAttribute('year');
-      setSelected({id: tr.id, period: year})
+      let year = tr.getAttribute("year");
+      setSelected({ id: tr.id, period: year });
       setModal(true);
     }
 
     if (type == "delete") {
       messageDelete({
-        url: urlPeriod,
+        url: studentRoutes.STUDENT,
         objectData: { id: tr.id },
-        name: "Periodo",
-        refresh: () => (clicked ? setClicked(false) : setClicked(true)),
+        name: "Estudiante",
+        refresh: () => {
+          if (clicked) {
+            setClicked(false);
+          } else {
+            setClicked(true);
+          }
+
+          refreshTable()
+        },
       });
     }
   };
+
 
   return (
     <div className="container-table">
@@ -50,10 +65,10 @@ export const StudentTable = ({ clicked, setClicked, students }) => {
             </thead>
             <tbody>
               {students.map((tr, index) => {
-                let courseName = `${tr.level} ${tr.parallel} ${tr.year}`
+                let courseName = `${tr.level} ${tr.parallel} ${tr.year}`;
                 let key = `tr-${index}`;
                 return (
-                  <tr key={key} id={tr.id} course={tr.course_id}>
+                  <tr key={key} id={tr.id}>
                     <td className="custom-td td-number">{index + 1}</td>
                     <td className="custom-td">{tr.dni}</td>
                     <td className="custom-td">{tr.name}</td>
@@ -82,4 +97,4 @@ export const StudentTable = ({ clicked, setClicked, students }) => {
       </div>
     </div>
   );
-}
+};

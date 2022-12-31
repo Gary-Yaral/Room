@@ -19,6 +19,7 @@ const messageDelete = (props) => {
   }).then((result) => {
     if (result.isConfirmed) {
       axios.delete(url, { data: objectData }).then(({ data }) => {
+        console.log(data);
         const { results } = data;
         if (results.affectedRows === 1) {
           Swal.fire({
@@ -58,6 +59,7 @@ const messageSave = (config) => {
   }).then((result) => {
     if (result.isConfirmed) {
       axios.post(url, objectData).then(({ data }) => {
+        console.log(data);
         if (data.status) {
           return Swal.fire({
             icon: "success",
@@ -72,7 +74,6 @@ const messageSave = (config) => {
             }
           });
         }
-        console.log(data);
         Swal.fire({
           icon: "warning",
           title: "Atención",

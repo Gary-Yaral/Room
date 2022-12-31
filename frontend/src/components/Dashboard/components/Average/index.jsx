@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { urlStudents, urlTypeAll } from "../../constants/routes";
+import { studentRoutes, urlTypeAll } from "../../constants/routes";
 import { generateAverage } from "../../utils/generateAverage";
 import { AverageForm } from "./components/AverageForm";
 import { AverageTable } from "./components/AverageTable";
@@ -33,7 +33,7 @@ export const Average = () => {
 
   const handleLoad = async (course, notes, titleData) => {
     const requestData = { course_id: course };
-    const { data: results } = await axios.post(urlStudents, requestData);
+    const { data: results } = await axios.post(studentRoutes.GET_LIST, requestData);
     const stds = results.results;
     setStudents(stds);
     setInputs(notes);

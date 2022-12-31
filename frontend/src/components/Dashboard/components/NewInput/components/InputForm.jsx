@@ -15,7 +15,7 @@ import {
   urlTypeAll,
   courseRoutes,
   inputRoutes,
-  urlStudentsList,
+  studentRoutes,
 } from "../../../constants/routes";
 
 const InputForm = ({ clicked, setClicked }) => {
@@ -61,7 +61,7 @@ const InputForm = ({ clicked, setClicked }) => {
 
     const {
       data: { results },
-    } = await axios.post(urlStudentsList, { course_id: data.course_id });
+    } = await axios.post(studentRoutes.GET_LIST, { course_id: data.course_id });
     let obj = { ...data, students: results, description };
     messageSave({
       url: inputRoutes.INPUT,

@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { initialLogin, initialState } from "./utils/defaultValues";
+import { useDispatch } from "react-redux";
+import { save } from "../../store/features/teacher/slice";
+import { loginRoute } from "../Dashboard/constants/routes";
+import { privateRoutes } from "../constants/router";
 import "./css/Login.css";
 import {
   testValue,
@@ -8,12 +13,6 @@ import {
   errorsMessages,
   regEx,
 } from "./utils/validateLogin";
-import { initialLogin, initialState } from "./utils/defaultValues";
-import { useDispatch } from "react-redux";
-import { save } from "../../store/features/teacher/slice";
-
-import { urlLogin } from "../Dashboard/constants/routes";
-import { privateRoutes } from "../constants/router";
 
 const Login = () => {
   const [loginData, setLoginData] = useState(initialLogin);
@@ -25,7 +24,7 @@ const Login = () => {
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     if (validateLogin(loginValid)) {
-      axios.post(urlLogin, loginData).then((res) => {
+      axios.post(loginRoute.LOGIN, loginData).then((res) => {
         let { data } = res;
         if (data.status) {
           let { teacher, token } = data
