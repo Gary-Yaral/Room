@@ -59,7 +59,6 @@ const messageSave = (config) => {
   }).then((result) => {
     if (result.isConfirmed) {
       axios.post(url, objectData).then(({ data }) => {
-        console.log(data);
         if (data.status) {
           return Swal.fire({
             icon: "success",

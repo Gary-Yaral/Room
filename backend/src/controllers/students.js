@@ -14,13 +14,9 @@ const save = (req, res) => {
   connection.query(query, (error, results) => {
     if (error) throw error;
     if (results.affectedRows > 0) {
-      query = studentQueries.INSERT_INPUTS(dni, course_id);
-      return connection.query(query, (error, results) => {
-        if (error) throw error;
-        return res.status(200).json({ status: true, results });
-      });
-    }
-
+      return res.status(200).json({ status: true, results });
+    };
+  
     return res
       .status(200)
       .json({

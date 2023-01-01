@@ -22,23 +22,23 @@ const Student = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({defaultValues});
+  } = useForm({ defaultValues });
 
   useEffect(() => {
-    const data = { teacher_dni: teacher.dni }
+    const data = { teacher_dni: teacher.dni };
     postData(courseRoutes.GET_ALL, data, setCourses);
   }, [teacher, clicked]);
 
   const refreshTable = (value) => {
     postData(studentRoutes.GET_ALL, { course_id: value }, setFound);
-  }
+  };
 
   const handleSearch = (e) => {
     let value = e.target.value;
     setCourse(e.target.value);
     if (value !== "") {
       setSearched(true);
-      refreshTable(value)
+      refreshTable(value);
     } else {
       setSearched(false);
     }
@@ -46,7 +46,7 @@ const Student = () => {
   return (
     <div className="container-view">
       <div className="form-title">Nuevo estudiante</div>
-      <NewStudent courses={courses} />
+      <NewStudent courses={courses} clicked={clicked} setClicked={setClicked} />
       <div className="container-input">
         <div className="form-title">Cargar estudiantes</div>
         <select
@@ -72,7 +72,7 @@ const Student = () => {
           clicked={clicked}
           setClicked={setClicked}
           students={found}
-          refreshTable={ () => refreshTable(course) }
+          refreshTable={() => refreshTable(course)}
         />
       )}
       {found.length === 0 && searched && <div>Sin resultados</div>}

@@ -20,7 +20,7 @@ export const NewStudent = ({ courses, clicked, setClicked }) => {
       url: studentRoutes.STUDENT, 
       objectData: data, 
       reset: () => reset(defaultValues),
-      refresh: () => (clicked ? setClicked(false) : setClicked(true)),
+      refresh: () => {clicked ? setClicked(false) : setClicked(true)}
     })
   };
 

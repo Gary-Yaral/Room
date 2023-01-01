@@ -1,6 +1,6 @@
 const { connection } = require("../sql/connection");
 const { generateInsertSQL } = require("../utils/functions/generateMultiQuery");
-const TEST_ID = 6;
+const { inputsQueries } = require("../utils/functions/sqlQuerys");
 
 const save = (req, res) => {
   let {
@@ -10,51 +10,28 @@ const save = (req, res) => {
     date,
     partial,
     quimestre,
-    description,
-    students,
+    description
   } = req.body;
 
-  let values = `
-    "${type}",
-    "${course_id}", 
-    "${subject}",
-    "${date}", 
-    "${partial}", 
-    "${quimestre}",
-    "${description}"`;
- 
-
-  let query = `INSERT INTO input(
-    type, 
+  let query = inputsQueries.SAVE(
+    type,
     course_id,
-    subject, 
     date,
-    partial, 
-    quimestre, 
-    description) VALUES(${values})`;
+    subject,
+    description,
+    partial,
+    quimestre
+  );
 
   return connection.query(query, (error, results) => {
     if (error) throw error;
-    if ( students.length === 0) {
-      return res.status(200).json({ data: results, status: true });
-    }
-
-    let inputID = results.insertId;
-    let note = 0
-    let sql = "INSERT INTO input_student(input, student, qualification) VALUES ?";
-    const queries = generateInsertSQL(inputID, students, note);
-    connection.query(sql, [queries], (error, results) => {
-      if (error) throw error;
-      return res.status(200).json({ data: results, status: true });
-    });
+    return res.status(200).json({ data: results, status: true });
   });
 };
 
-const update = (req, res) => {
-};
+const update = (req, res) => {};
 
-const deleteRow = (req, res) => {
-};
+const deleteRow = (req, res) => {};
 
 const getAll = (req, res) => {
   let query = "SELECT * FROM input_type";
@@ -125,4 +102,4 @@ const foundMany = (req, res) => {
   });
 };
 
-module.exports = { save, update, deleteRow, getAll, getOne, foundMany};
+module.exports = { save, update, deleteRow, getAll, getOne, foundMany };
