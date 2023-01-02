@@ -1,5 +1,5 @@
 export const defaultValues = {
-  id: "",
+  course_id: "",
   period: "",
   speciality: "",
   level: "",

@@ -19,7 +19,6 @@ const messageDelete = (props) => {
   }).then((result) => {
     if (result.isConfirmed) {
       axios.delete(url, { data: objectData }).then(({ data }) => {
-        console.log(data);
         const { results } = data;
         if (results.affectedRows === 1) {
           Swal.fire({

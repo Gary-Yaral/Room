@@ -10,7 +10,7 @@ import {
   urlQuimestres,
   urlSubjects,
   courseRoutes,
-  urlMedias
+  averageRoute
 } from "../../../constants/routes";
 
 const AverageForm = ({ handleLoad, dni }) => {
@@ -48,8 +48,8 @@ const AverageForm = ({ handleLoad, dni }) => {
       partial: _partial[0]
     })
     
-    const { data: {results} } = await axios.post(urlMedias, formData)
-    handleLoad(course_id, results, titleData)
+    const { data: {results} } = await axios.post(averageRoute.AVERAGE, formData)
+    handleLoad(course_id, results[0], titleData)
   };
 
   return (

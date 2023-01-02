@@ -1,6 +1,6 @@
 const {
  found
-} = require("../controllers/medias");
+} = require("../controllers/averages");
 const { validateToken } = require("../middlewares/validateToken");
 const router = require("express").Router();
 

@@ -2,14 +2,7 @@ const { connection } = require("../sql/connection");
 const { studentQueries } = require("../utils/functions/sqlQuerys");
 
 const save = (req, res) => {
-  let { dni, course_id, name, lastname } = req.body;
-
-  let query = studentQueries.SAVE(
-    dni,
-    course_id,
-    name,
-    lastname,
-  );
+  let query = studentQueries.SAVE(req.body);
 
   connection.query(query, (error, results) => {
     if (error) throw error;

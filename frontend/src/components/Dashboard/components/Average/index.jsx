@@ -14,6 +14,7 @@ export const Average = () => {
   const [inputs, setInputs] = useState([]);
   const [averages, setAverages] = useState([]);
   const [title, setTitle] = useState(defaultTitle);
+  const [clicked, setClicked] = useState(false);
   const {
     info: { teacher },
   } = useSelector(({ logged }) => logged);
@@ -38,6 +39,7 @@ export const Average = () => {
     setStudents(stds);
     setInputs(notes);
     setTitle(titleData);
+    setClicked(true)
   };
 
   return (
@@ -53,8 +55,13 @@ export const Average = () => {
             <div>{`P: ${capitalize(title.partial)}`}</div>
           </div>
           <AverageTable averages={averages} types={types} />
-        </>
-      )}
+        </>) 
+      }
+      {
+        (averages.length === 0 && clicked) && (
+          <div>Busqueda sin resultados</div>
+        )
+      }
     </div>
   );
 };

@@ -28,6 +28,7 @@ export const CourseUpdate = ({
   };
 
   const onSubmit = (data) => {
+    console.log(data);
     let speciality = data.speciality
     if(speciality.length > 0) {
       speciality = data.speciality

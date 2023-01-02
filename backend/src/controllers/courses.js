@@ -1,60 +1,30 @@
 const { connection } = require("../sql/connection");
+const { courseQueries } = require("../utils/functions/sqlQuerys");
 
 const save = (req, res) => {
-  let { level, parallel, period, speciality } = req.body;
- 
-  let query = `
-  SELECT * FROM course
-    WHERE 
-      level = "${level}" AND
-      period = "${period}" AND
-      parallel = "${parallel}"`;
-
+  let query = courseQueries.SAVE(req.body);
   connection.query(query, (error, results) => {
     if (error) throw error;
-    if (results.length > 0) {
-      return res.json({ status: false, error: `Este curso ya existe` });
-    }
-
-    let values = `"${level}","${parallel}", "${speciality}", "${period}"`;
-    query = `INSERT INTO course(level, parallel, speciality, period) VALUES(${values})`;
-
-    connection.query(query, (error, results) => {
-      if (error) throw error;
+    if (results.affectedRows > 0) {
       return res.status(200).json({ status: true, results });
-    });
+    }
+    return res
+      .status(200)
+      .json({ 
+        status: false, 
+        error: "Ya existe el curso que desea agregar" 
+      });
   });
 };
 
 const update = (req, res) => {
-  let { id, level, parallel, period, speciality } = req.body;
- 
-  let query = `
-  SELECT * FROM course
-    WHERE 
-      level = "${level}" AND
-      period = "${period}" AND
-      parallel = "${parallel}"`;
-
+  let query = courseQueries.UPDATE(req.body)
   connection.query(query, (error, results) => {
     if (error) throw error;
-    if (results.length > 0 && results[0].id !== id) {
-      return res.json({ status: false, error: `Este curso ya existe` });
-    }
-
-    let values = `"${level}","${parallel}", "${speciality}", "${period}"`;
-    query = `UPDATE course 
-      SET 
-        level="${level}", 
-        parallel="${parallel}", 
-        speciality="${speciality}", 
-        period="${period}" 
-      WHERE id ="${id}"`;
-
-    connection.query(query, (error, results) => {
-      if (error) throw error;
+    if (results.affectedRows > 0) {
       return res.status(200).json({ status: true, results });
-    });
+    }
+    return res.json({ status: false, error: `No existe el curso que desea modificar` });
   });
 };
 
@@ -81,36 +51,11 @@ const deleteRow = (req, res) => {
 };
 
 const getAll = (req, res) => {
-  let { teacher_dni } = req.body;
-
-  let query = `SELECT 
-    course.id AS id,
-    level.name AS level, 
-    level.id AS levelID,
-    course.speciality, 
-    parallel.name AS parallel, 
-    parallel.id AS parallelID,
-    period.id AS periodID, 
-    period.year 
-    AS year
-  FROM teacher
-    INNER JOIN school
-    ON school.teacher_dni = teacher.dni
-    INNER JOIN period
-    ON period.school_id = school.id
-    INNER JOIN course
-    ON course.period= period.id
-    INNER JOIN LEVEL
-    ON level.id = course.level
-    INNER JOIN parallel
-    ON parallel.id = course.parallel
-  WHERE teacher.dni = "${teacher_dni}"`;
-
+  let query = courseQueries.GET_ALL(req.body)
   return connection.query(query, (error, results) => {
     if (error) throw error;
     return res.status(200).json({ results });
   });
 };
-
 
 module.exports = { save, update, deleteRow, getAll };

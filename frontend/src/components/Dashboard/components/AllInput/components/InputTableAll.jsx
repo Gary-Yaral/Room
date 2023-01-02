@@ -1,29 +1,31 @@
 import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { inputRoutes } from "../../../constants/routes"
+import { messageDelete } from "../../../utils/messageAlert"
 
 export const InputTableAll = ({clicked, setClicked, results}) => {
   const [modal, setModal] = useState(false);
   const [selected, setSelected] = useState({id: "", period: ""})
 
   const handleClick = (e, type) => {
-    /* let td = e.target.parentNode;
+    let td = e.target.parentNode;
     let tr = td.parentNode;
-    if (type == "update") {
+    console.log(tr.id);
+    /* if (type == "update") {
       let year = tr.getAttribute('year');
       setSelected({id: tr.id, period: year})
       setModal(true);
-    }
+    } */
 
     if (type == "delete") {
       messageDelete({
-        url: urlPeriod,
+        url: inputRoutes.INPUT,
         objectData: { id: tr.id },
-        name: "Periodo",
+        name: "Insumo",
         refresh: () => (clicked ? setClicked(false) : setClicked(true)),
       });
-    } */
+    }
   };
-
   return (
     <div className="container-table">
       {/* {modal && (
@@ -51,14 +53,10 @@ export const InputTableAll = ({clicked, setClicked, results}) => {
               </tr>
             </thead>
             <tbody>
-              {results.map((tr, index) => {
+              {results[0].map((tr, index) => {
+               
                 let courseName = `${tr.level_name} ${tr.parallel_name} ${tr.year}`
-                let date = tr.date.split("-");
-                let year = (date[0]);
-                let month = (date[1]);
-                let last = date[2].split("")
-                let day = (last[0] + last[1]);
-                let fullDate = `${year}-${month}-${day}`
+                let date = tr.date.split("T")[0];
                 let key = `tr-${index}`;
                 return (
                   <tr key={key} id={tr.id} course={tr.course_id}>
@@ -68,7 +66,7 @@ export const InputTableAll = ({clicked, setClicked, results}) => {
                     <td className="custom-td">{tr.quimestre_name}</td>
                     <td className="custom-td">{tr.partial_name}</td>
                     <td className="custom-td">{tr.description}</td>
-                    <td className="custom-td">{fullDate}</td>
+                    <td className="custom-td">{date}</td>
                     <td className="custom-td td-btns">
                       <button
                         className="btn-table"

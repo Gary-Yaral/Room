@@ -44,9 +44,10 @@ let urlLogin = "http://localhost:6500/api/v1.0/login";
  /* TYPES */
 let urlTypeAll = "http://localhost:6500/api/v1.0/inputs/all";
 
-/* MEDIAS */
-let urlMedias = "http://localhost:6500/api/v1.0/medias";
-
+/* Averages */
+export const averageRoute = {
+  AVERAGE: `${API}/averages`
+}
 
 /* Input Student */
 let urlInputStudentFound = "http://localhost:6500/api/v1.0/input_student/found";
@@ -65,5 +66,4 @@ export {
   urlInputStudentFound,
   urlInputStudentsAll,
   urlInputStudents,
-  urlMedias
 }

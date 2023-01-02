@@ -7,6 +7,7 @@ import { CustomSelect } from "../../commons/CustomSelect";
 import { defaultValues } from "../constants";
 
 export const NewStudent = ({ courses, clicked, setClicked }) => {
+
   const {
     register,
     formState: { errors },

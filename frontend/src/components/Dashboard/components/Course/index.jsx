@@ -14,6 +14,7 @@ import {
   urlParallels,
   courseRoutes,
 } from "../../constants/routes";
+import { readArray } from "../../utils/readArray";
 
 export function Course() {
   const [levels, setLevels] = useState([]);
@@ -53,7 +54,7 @@ export function Course() {
   };
 
   useEffect(() => {
-    const data = { teacher_dni: teacher.dni }
+    const data = { teacher_dni: teacher.dni };
     postData(schoolRoutes.GET_ALL, data, setSchool);
     postData(periodRoutes.PERIOD_ALL, data, setPeriods);
     postData(courseRoutes.GET_ALL, data, setCourses);
@@ -108,9 +109,14 @@ export function Course() {
       <CoursesTable
         clicked={clicked}
         setClicked={setClicked}
-        schoolData={{ school, periods, levels, courses, parallels }}
+        schoolData={{
+          school,
+          periods,
+          levels,
+          courses: readArray(courses),
+          parallels,
+        }}
       />
     </div>
   );
 }
-

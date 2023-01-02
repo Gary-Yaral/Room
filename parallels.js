@@ -1,5 +1,5 @@
-const { save, getAll, getOne, update, deleteRow } = require('../controllers/parallels')
-const { validateToken } = require('../middlewares/validateToken')
+const { save, getAll, getOne, update, deleteRow } = require('./backend/src/controllers/parallels')
+const { validateToken } = require('./backend/src/middlewares/validateToken')
 const router = require('express').Router()
 
 router.post('/', validateToken, save)

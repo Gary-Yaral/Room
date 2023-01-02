@@ -19,7 +19,7 @@ export const CoursesTable = ({ schoolData, clicked, setClicked }) => {
       let parallel = tr.getAttribute("parallel");
       let speciality = tr.getAttribute("speciality");
       let id = tr.getAttribute("id");
-      setSelected({ id: parseInt(id), period, parallel, level, speciality });
+      setSelected({ course_id: parseInt(id), period, parallel, level, speciality });
       setModal(true);
     }
 

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { postData } from "../../../../utils/requestData";
 import { courseRoutes, studentRoutes } from "../../constants/routes";
+import { readArray } from "../../utils/readArray";
 import { NewStudent } from "./components/NewStudent";
 import { StudentTable } from "./components/StudentTable";
 import { defaultValues } from "./constants";
@@ -43,10 +44,15 @@ const Student = () => {
       setSearched(false);
     }
   };
+
   return (
     <div className="container-view">
       <div className="form-title">Nuevo estudiante</div>
-      <NewStudent courses={courses} clicked={clicked} setClicked={setClicked} />
+      <NewStudent
+        courses={readArray(courses)}
+        clicked={clicked}
+        setClicked={setClicked}
+      />
       <div className="container-input">
         <div className="form-title">Cargar estudiantes</div>
         <select
@@ -57,7 +63,7 @@ const Student = () => {
           onChange={handleSearch}
         >
           <option value="">Seleccione el curso</option>
-          {courses.map((opt, index) => {
+          {readArray(courses).map((opt, index) => {
             let key = `${opt.id}`;
             return (
               <option value={opt.id} key={key}>
