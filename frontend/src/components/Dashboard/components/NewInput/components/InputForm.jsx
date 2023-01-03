@@ -17,6 +17,7 @@ import {
   inputRoutes,
   studentRoutes,
 } from "../../../constants/routes";
+import { readArray } from "../../../utils/readArray";
 
 const InputForm = ({ clicked, setClicked }) => {
   const [courses, setCourses] = useState([]);
@@ -78,7 +79,7 @@ const InputForm = ({ clicked, setClicked }) => {
         title={"Curso"}
         prop={["level", "parallel", "year"]}
         name={"course_id"}
-        options={courses}
+        options={readArray(courses)}
         register={register}
         errors={errors}
         letterA={false}

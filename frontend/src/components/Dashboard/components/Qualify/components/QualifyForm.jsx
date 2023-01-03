@@ -17,6 +17,7 @@ import {
   urlInputStudentFound,
 } from "../../../constants/routes";
 import axios from "axios";
+import { readArray } from "../../../utils/readArray";
 
 const defaultValues = {
   course_id: "",
@@ -86,7 +87,7 @@ export const QualifyForm = ({
         title={"Curso"}
         prop={["level", "parallel", "year"]}
         name={"course_id"}
-        options={courses}
+        options={readArray(courses)}
         register={register}
         errors={errors}
         letterA={false}

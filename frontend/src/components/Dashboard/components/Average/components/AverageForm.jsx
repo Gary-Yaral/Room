@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { getData, postData } from "../../../../../utils/requestData";
 import { CustomSelect } from "../../commons/CustomSelect";
-import { defaultValues } from "../constants";
+import { defaultTitle, defaultValues } from "../constants";
 import { createTitle } from "../utils/createTitle";
+import { readArray } from "../../../utils/readArray";
+
 import axios from "axios";
 import {
   urlPartials,
   urlQuimestres,
   urlSubjects,
   courseRoutes,
-  averageRoute
+  averageRoute,
 } from "../../../constants/routes";
 
 const AverageForm = ({ handleLoad, dni }) => {
@@ -27,29 +29,38 @@ const AverageForm = ({ handleLoad, dni }) => {
   } = useForm({ defaultValues });
 
   useEffect(() => {
-      let requestData =  { teacher_dni: dni }
-      postData(courseRoutes.GET_ALL, requestData, setCourses);
-      getData(urlQuimestres, setQuimestres);
-      getData(urlPartials, setPartials);
-      getData(urlSubjects, setSubjects);
+    let requestData = { teacher_dni: dni };
+    postData(courseRoutes.GET_ALL, requestData, setCourses);
+    getData(urlQuimestres, setQuimestres);
+    getData(urlPartials, setPartials);
+    getData(urlSubjects, setSubjects);
   }, []);
 
-  const onSubmit = async(formData) => {
-    const { course_id, subject, quimestre, partial } = formData
-    const _course = courses.filter(course => course.id === parseInt(course_id))
-    const _subject = subjects.filter(sub => sub.id === parseInt(subject))
-    const _quimestre = quimestres.filter(quim => quim.id === parseInt(quimestre))
-    const _partial = partials.filter(part => part.id === parseInt(partial))
+  const onSubmit = async (formData) => {
+    const { course_id, subject, quimestre, partial } = formData;
+    let titleData = defaultTitle;
+    if (readArray(courses).length > 0) {
+      const _course = readArray(courses).filter(
+        (course) => course.id === parseInt(course_id)
+      );
+      const _subject = subjects.filter((sub) => sub.id === parseInt(subject));
+      const _quimestre = quimestres.filter(
+        (quim) => quim.id === parseInt(quimestre)
+      );
+      const _partial = partials.filter((part) => part.id === parseInt(partial));
 
-    const titleData = createTitle({
-      course: _course[0],
-      subject: _subject[0],
-      quimestre: _quimestre[0],
-      partial: _partial[0]
-    })
-    
-    const { data: {results} } = await axios.post(averageRoute.AVERAGE, formData)
-    handleLoad(course_id, results[0], titleData)
+      titleData = createTitle({
+        course: _course[0],
+        subject: _subject[0],
+        quimestre: _quimestre[0],
+        partial: _partial[0],
+      });
+    }
+
+    const {
+      data: { results },
+    } = await axios.post(averageRoute.AVERAGE, formData);
+    handleLoad(course_id, results[0], titleData);
   };
 
   return (
@@ -59,7 +70,7 @@ const AverageForm = ({ handleLoad, dni }) => {
           title={"Curso"}
           prop={["level", "parallel", "year"]}
           name={"course_id"}
-          options={courses}
+          options={readArray(courses)}
           register={register}
           errors={errors}
           letterA={false}

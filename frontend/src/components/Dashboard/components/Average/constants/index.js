@@ -4,6 +4,7 @@ const defaultValues = {
   partial: "",
   subject: "",
 };
+
 const defaultTitle = {
   course: "",
   quimestre: "",
